@@ -1,4 +1,4 @@
-# 递归获取.csv文件存入到list1
+
 import os
 import pandas as pd
 import numpy as np
