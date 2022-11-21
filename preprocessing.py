@@ -49,9 +49,8 @@ def read_csvfile(processed_files): #add each colume data together and combine th
 
     right_acc_x, right_acc_y, right_acc_z = [], [], []
     right_gyro_x, right_gyro_y, right_gyro_z = [], [], []
-    dataset = []
     Label = []
-
+    number = len(processed_files)
     for i in range(1):
         file = pd.read_csv(processed_files[i])
 
@@ -76,8 +75,8 @@ def read_csvfile(processed_files): #add each colume data together and combine th
 
     right_acc = np.vstack((right_acc_x, right_acc_y,right_acc_z))
     right_gyro = np.vstack((right_gyro_x,right_gyro_y,right_gyro_z))
-    dataset = np.vstack((right_acc,right_gyro))
-    return right_acc, right_gyro, Label,right
+    data = np.vstack((right_acc,right_gyro))
+    return right_acc, right_gyro, Label,data
 
 
 if __name__ == '__main__':
@@ -88,10 +87,11 @@ if __name__ == '__main__':
     file = pd.read_csv(list_csv[1])
     print(str(file.iloc[3]["dom_hand"]))
     dataset_train,dataset_test,dataset_vali = splitdataset(list_csv)
-
-    test_acc,test_gyro,test_label = read_csvfile(dataset_test)
-    train_acc, train_gyro, train_label = read_csvfile(dataset_train)
-    vali_acc, vali_gyro, vali_label,dataset = read_csvfile(dataset_vali)
+    print(len(dataset_vali))
+    test_acc,test_gyro,test_label,data = read_csvfile(dataset_test)
+    train_acc, train_gyro, train_label,data = read_csvfile(dataset_train)
+    vali_acc, vali_gyro, vali_label,data = read_csvfile(dataset_vali)
+    print(data.shape)
 
 
 
