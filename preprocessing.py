@@ -90,6 +90,6 @@ if __name__ == '__main__':
     test_acc,test_gyro,test_label = read_csvfile(dataset_test)
     train_acc, train_gyro, train_label = read_csvfile(dataset_train)
     vali_acc, vali_gyro, vali_label =  read_csvfile(dataset_vali)
-
+    #size of the vali_acc or other dataset will be (3,number of the data)
 
 
