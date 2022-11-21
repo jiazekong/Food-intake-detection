@@ -1,4 +1,4 @@
-
+# 递归获取.csv文件存入到list1
 import os
 import pandas as pd
 import numpy as np
@@ -49,6 +49,7 @@ def read_csvfile(processed_files): #add each colume data together and combine th
 
     right_acc_x, right_acc_y, right_acc_z = [], [], []
     right_gyro_x, right_gyro_y, right_gyro_z = [], [], []
+    dataset = []
     Label = []
 
     for i in range(1):
@@ -75,13 +76,14 @@ def read_csvfile(processed_files): #add each colume data together and combine th
 
     right_acc = np.vstack((right_acc_x, right_acc_y,right_acc_z))
     right_gyro = np.vstack((right_gyro_x,right_gyro_y,right_gyro_z))
-    return right_acc, right_gyro, Label
+    dataset = np.vstack((right_acc,right_gyro))
+    return right_acc, right_gyro, Label,right
 
 
 if __name__ == '__main__':
     paths = r'E:\论文数据集\OREBA_Dataset_Public_1_0\Dataset_Public\oreba_dis\recordings'
     list_csv = []
-    list_dir(file_dir=paths)
+    list_csv = list_dir(file_dir=paths)
     print(list_csv[0])
     file = pd.read_csv(list_csv[1])
     print(str(file.iloc[3]["dom_hand"]))
@@ -89,7 +91,7 @@ if __name__ == '__main__':
 
     test_acc,test_gyro,test_label = read_csvfile(dataset_test)
     train_acc, train_gyro, train_label = read_csvfile(dataset_train)
-    vali_acc, vali_gyro, vali_label =  read_csvfile(dataset_vali)
-    #size of the vali_acc or other dataset will be (3,number of the data)
+    vali_acc, vali_gyro, vali_label,dataset = read_csvfile(dataset_vali)
+
 
 
