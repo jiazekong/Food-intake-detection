@@ -1,4 +1,4 @@
-# 递归获取.csv文件存入到list1
+
 import os
 import pandas as pd
 import numpy as np
@@ -10,7 +10,7 @@ TEST_IDS = [5,9]
 #  Put all the .csv files in the list_csv
 def list_dir(file_dir):
 
-    # list_csv = []
+   # list_csv = []
     dir_list = os.listdir(file_dir)
     for cur_file in dir_list:
         path = os.path.join(file_dir, cur_file)
@@ -71,12 +71,13 @@ def read_csvfile(processed_files): #add each colume data together and combine th
                     Label.append(1)
                 else:
                     pass
-            print("the length of Lable of file is ", len(Label))
+            #print("the length of Lable of file is ", len(Label))
 
     right_acc = np.vstack((right_acc_x, right_acc_y,right_acc_z))
     right_gyro = np.vstack((right_gyro_x,right_gyro_y,right_gyro_z))
     data = np.vstack((right_acc,right_gyro))
-    return right_acc, right_gyro, Label,data
+    #print(data.shape)
+    return right_acc, right_gyro, Label,data,Label
 
 
 if __name__ == '__main__':
@@ -88,10 +89,14 @@ if __name__ == '__main__':
     print(str(file.iloc[3]["dom_hand"]))
     dataset_train,dataset_test,dataset_vali = splitdataset(list_csv)
     print(len(dataset_vali))
-    test_acc,test_gyro,test_label,data = read_csvfile(dataset_test)
-    train_acc, train_gyro, train_label,data = read_csvfile(dataset_train)
-    vali_acc, vali_gyro, vali_label,data = read_csvfile(dataset_vali)
-    print(data.shape)
+    test_acc,test_gyro,test_label,data_test,label_test = read_csvfile(dataset_test)
+    train_acc, train_gyro, train_label,data_train,label_train = read_csvfile(dataset_train)
+    vali_acc, vali_gyro, vali_label,data_vali,label_vali = read_csvfile(dataset_vali)
+    print(data_test.shape)
+
+
+
+
 
 
 
